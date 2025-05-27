@@ -78,6 +78,23 @@ class DrawerWidget extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w400),
               ),
             ),
+            ListTile(
+              leading: Icon(Icons.settings, color: Colors.teal),
+              title: Text(
+                "Settings",
+                style: TextStyle(fontWeight: FontWeight.w400),
+              ),
+            ),
+            SizedBox(height: 20),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.logout, color: Colors.teal),
+              title: Text(
+                "Logout",
+                style: TextStyle(fontWeight: FontWeight.w400),
+              ),
+            ),
+
             // Add more ListTiles as needed
           ],
         ),
