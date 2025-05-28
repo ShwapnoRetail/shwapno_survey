@@ -24,9 +24,9 @@ PinTheme AppOTPStyle() {
   return PinTheme(
     inactiveColor: colorLight,
     inactiveFillColor: colorWhite,
-    selectedColor: colorGreen,
+    selectedColor: Colors.teal,
     activeColor: colorWhite,
-    selectedFillColor: colorGreen,
+    selectedFillColor: Colors.teal,
     shape: PinCodeFieldShape.box,
     borderRadius: BorderRadius.circular(5),
     fieldHeight: 50,

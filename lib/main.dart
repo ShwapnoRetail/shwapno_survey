@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: _lightTheme,
           darkTheme: _darkTheme,
-          initialRoute: '/registration',
+          initialRoute: '/otpVerfication',
           routes: {
             '/': (context) => SplashScreen(),
             '/login': (context) => LoginScreen(),
