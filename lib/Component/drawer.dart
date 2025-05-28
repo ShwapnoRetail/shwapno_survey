@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shwapno_survey/Component/bottomNav.dart';
 
-class DrawerWidget extends StatefulWidget {
-  const DrawerWidget({super.key});
-
+class DrawerPage extends StatefulWidget {
   @override
-  State<DrawerWidget> createState() => _DrawerWidgetState();
+  State<DrawerPage> createState() => _DrawerPageState();
 }
 
-class _DrawerWidgetState extends State<DrawerWidget> {
+class _DrawerPageState extends State<DrawerPage> {
   int _selectedIndex = 0;
   final PageController _pageController = PageController();
 

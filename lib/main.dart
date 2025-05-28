@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shwapno_survey/Component/drawer.dart';
+import 'package:shwapno_survey/Component/splashScreen.dart';
+import 'package:shwapno_survey/Screen/Auth/forgetPassword.dart';
+import 'package:shwapno_survey/Screen/Auth/otpVerify.dart';
+import 'package:shwapno_survey/Screen/Auth/resetPass.dart';
+import 'package:shwapno_survey/Screen/Auth/signIn.dart';
+import 'package:shwapno_survey/Screen/Auth/signUp.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,11 +23,20 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          title: "Survey App",
           debugShowCheckedModeBanner: false,
           themeMode: ThemeMode.system,
           theme: _lightTheme,
           darkTheme: _darkTheme,
-          home: const DrawerWidget(),
+          initialRoute: '/',
+          routes: {
+            '/': (context) => SplashScreen(),
+            '/login': (context) => LoginScreen(),
+            '/registration': (context) => SignUpScreen(),
+            '/otpVerfication': (context) => OtpVerificationScreen(),
+            '/resetPassword': (context) => ResetPasswordScreen(),
+            '/forgetPassword': (context) => ForgetPasswordScreen(),
+          },
         );
       },
     );
