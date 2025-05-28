@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shwapno_survey/Component/drawer.dart';
 import 'package:shwapno_survey/Component/splashScreen.dart';
 import 'package:shwapno_survey/Screen/Auth/forgetPassword.dart';
 import 'package:shwapno_survey/Screen/Auth/otpVerify.dart';
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: _lightTheme,
           darkTheme: _darkTheme,
-          initialRoute: '/login',
+          initialRoute: '/registration',
           routes: {
             '/': (context) => SplashScreen(),
             '/login': (context) => LoginScreen(),
