@@ -45,7 +45,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
                 Container(
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/otpVerfication');
+                    },
                     style: AppButtonStyle(),
                     child: SuccessButtonChild("Register"),
                   ),
