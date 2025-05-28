@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shwapno_survey/Component/bottomNav.dart';
+import 'package:shwapno_survey/Screen/Profile/settings.dart';
 import 'package:shwapno_survey/Screen/Survey/surveyOutlet.dart';
 import 'package:shwapno_survey/Screen/Survey/surveyPage.dart';
 import 'package:shwapno_survey/Screen/Survey/surveyQuestion.dart'; // Add this import
@@ -151,7 +152,7 @@ class _DrawerPageState extends State<DrawerPage> {
           const SurveyHomePage(),
           const SurveyQuestionScreen(), // Question screen
           const SurveyOutletScreen(), // Outlets screen
-          const Center(child: Text('Settings')), // Settings screen
+          const SettingsScreen(), // Settings screen
         ],
       ),
       bottomNavigationBar: BottomNavigationWidget(
