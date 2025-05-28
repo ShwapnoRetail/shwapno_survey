@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shwapno_survey/Component/bottomNav.dart';
+import 'package:shwapno_survey/Screen/Survey/surveyPage.dart'; // Add this import
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
@@ -58,34 +59,72 @@ class _DrawerPageState extends State<DrawerPage> {
             ListTile(
               leading: Icon(Icons.dashboard, color: Colors.teal),
               title: Text('Dashboard'),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 0;
+                  _pageController.jumpToPage(0);
+                });
+                Navigator.pop(context); // Close the drawer
+              },
             ),
             ListTile(
               leading: Icon(Icons.question_answer, color: Colors.teal),
               title: Text("Question"),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 1;
+                  _pageController.jumpToPage(1);
+                });
+                Navigator.pop(context); // Close the drawer
+              },
             ),
             ListTile(
               leading: Icon(Icons.score, color: Colors.teal),
               title: Text("My Rank"),
             ),
             ListTile(
-              leading: Icon(Icons.shape_line, color: Colors.teal),
+              leading: Icon(
+                Icons.store,
+                color: Colors.teal,
+              ), // Changed icon to match bottom nav
               title: Text("My Outlets"),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 2;
+                  _pageController.jumpToPage(2);
+                });
+                Navigator.pop(context); // Close the drawer
+              },
             ),
             ListTile(
               leading: Icon(Icons.settings, color: Colors.teal),
               title: Text("Settings"),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = 3;
+                  _pageController.jumpToPage(3);
+                });
+                Navigator.pop(context); // Close the drawer
+              },
             ),
             const SizedBox(height: 20),
             const Divider(),
             ListTile(
               leading: Icon(Icons.logout, color: Colors.teal),
               title: Text("Logout"),
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  '/login',
+                  (route) => false,
+                );
+              },
             ),
           ],
         ),
       ),
       appBar: AppBar(
-        title: const Text("Welcome to Survey"),
+        title: Text(_getAppBarTitle(_selectedIndex)),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
@@ -106,11 +145,11 @@ class _DrawerPageState extends State<DrawerPage> {
             _selectedIndex = index;
           });
         },
-        children: const [
-          Center(child: Text('Dashboard')),
-          Center(child: Text('Question')),
-          Center(child: Text('My Outlets')),
-          Center(child: Text('Settings')),
+        children: [
+          const SurveyHomePage(),
+          const Center(child: Text('Question')), // Question screen
+          const Center(child: Text('My Outlets')), // Outlets screen
+          const Center(child: Text('Settings')), // Settings screen
         ],
       ),
       bottomNavigationBar: BottomNavigationWidget(
@@ -118,5 +157,20 @@ class _DrawerPageState extends State<DrawerPage> {
         onTap: _onTapped,
       ),
     );
+  }
+
+  String _getAppBarTitle(int index) {
+    switch (index) {
+      case 0:
+        return "Survey Dashboard";
+      case 1:
+        return "Questions";
+      case 2:
+        return "My Outlets";
+      case 3:
+        return "Settings";
+      default:
+        return "Welcome";
+    }
   }
 }

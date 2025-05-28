@@ -50,6 +50,16 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(height: 20),
                       InkWell(
                         onTap: () {
+                          Navigator.pushNamed(context, "/resetPassword");
+                        },
+                        child: Text(
+                          'Forget Password?',
+                          style: Head7Text(colorLightGray),
+                        ),
+                      ),
+                      SizedBox(height: 18),
+                      InkWell(
+                        onTap: () {
                           Navigator.pushNamed(context, "/registration");
                         },
                         child: Row(
