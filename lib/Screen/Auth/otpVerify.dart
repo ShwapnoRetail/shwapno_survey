@@ -40,6 +40,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                   onCompleted: (v) {},
                   onChanged: (value) => {},
                 ),
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: AppButtonStyle(),
+                    child: SuccessButtonChild("Verify"),
+                  ),
+                ),
               ],
             ),
           ),

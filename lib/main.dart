@@ -6,6 +6,7 @@ import 'package:shwapno_survey/Screen/Auth/otpVerify.dart';
 import 'package:shwapno_survey/Screen/Auth/resetPass.dart';
 import 'package:shwapno_survey/Screen/Auth/signIn.dart';
 import 'package:shwapno_survey/Screen/Auth/signUp.dart';
+import 'package:shwapno_survey/Screen/Dashboard/dashboardScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,9 +28,10 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.system,
           theme: _lightTheme,
           darkTheme: _darkTheme,
-          initialRoute: '/otpVerfication',
+          initialRoute: '/',
           routes: {
             '/': (context) => SplashScreen(),
+            '/dashboard': (context) => const DashboardScreen(),
             '/login': (context) => LoginScreen(),
             '/registration': (context) => SignUpScreen(),
             '/otpVerfication': (context) => OtpVerificationScreen(),

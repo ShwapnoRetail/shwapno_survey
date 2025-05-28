@@ -21,6 +21,11 @@ class _SplashScreenState extends State<SplashScreen>
         _textVisible = true;
       });
     });
+
+    // Redirect to login after 2 seconds
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, '/login');
+    });
   }
 
   @override
