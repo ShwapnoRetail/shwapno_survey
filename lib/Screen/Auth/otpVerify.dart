@@ -43,7 +43,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 Container(
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/login');
                     },
                     style: AppButtonStyle(),
                     child: SuccessButtonChild("Verify"),

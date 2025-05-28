@@ -84,7 +84,21 @@ class _DrawerPageState extends State<DrawerPage> {
           ],
         ),
       ),
-      appBar: AppBar(title: const Text("Welcome to Shwapno Survey")),
+      appBar: AppBar(
+        title: const Text("Welcome to Survey"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                context,
+                '/login',
+                (route) => false,
+              );
+            },
+          ),
+        ],
+      ),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
