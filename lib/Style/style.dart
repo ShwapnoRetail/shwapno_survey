@@ -48,7 +48,7 @@ TextStyle Head1Text(textColor) {
 TextStyle Head6Text(textColor) {
   return TextStyle(
     color: textColor,
-    fontSize: 16,
+    fontSize: 18,
     fontFamily: 'poppins',
     fontWeight: FontWeight.w400,
   );
@@ -75,7 +75,7 @@ TextStyle Head9Text(textColor) {
 InputDecoration AppInputDecoration(label) {
   return InputDecoration(
     focusedBorder: const OutlineInputBorder(
-      borderSide: const BorderSide(color: colorGreen, width: 1),
+      borderSide: const BorderSide(color: Colors.teal, width: 1),
     ),
     fillColor: colorWhite,
     filled: true,
@@ -137,7 +137,7 @@ TextStyle ButtonTextStyle() {
 Ink SuccessButtonChild(String ButtonText) {
   return Ink(
     decoration: BoxDecoration(
-      color: colorGreen,
+      color: Colors.teal,
       borderRadius: BorderRadius.circular(6),
     ),
     child: Container(

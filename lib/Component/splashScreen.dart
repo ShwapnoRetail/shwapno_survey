@@ -50,13 +50,13 @@ class _SplashScreenState extends State<SplashScreen>
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Logo
-                Image.asset("assets/images/shwapno.png", width: 200),
+                Image.asset("assets/images/shwapno.png", width: 150),
 
                 const SizedBox(height: 20),
 
                 // Animated Text
                 AnimatedSlide(
-                  duration: const Duration(milliseconds: 600),
+                  duration: const Duration(milliseconds: 500),
                   offset: _textVisible ? Offset.zero : const Offset(0, 0.5),
                   curve: Curves.easeOut,
                   child: AnimatedOpacity(
