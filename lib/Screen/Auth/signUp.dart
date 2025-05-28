@@ -21,7 +21,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Joint With US!", style: Head1Text(colorDarkBlue)),
+                Text("Join With US!", style: Head1Text(colorDarkBlue)),
                 SizedBox(height: 10),
                 TextFormField(
                   decoration: AppInputDecoration("Enter Your Name"),

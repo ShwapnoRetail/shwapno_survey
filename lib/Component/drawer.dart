@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shwapno_survey/Component/bottomNav.dart';
-import 'package:shwapno_survey/Screen/Survey/surveyPage.dart'; // Add this import
+import 'package:shwapno_survey/Screen/Survey/surveyOutlet.dart';
+import 'package:shwapno_survey/Screen/Survey/surveyPage.dart';
+import 'package:shwapno_survey/Screen/Survey/surveyQuestion.dart'; // Add this import
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
@@ -147,8 +149,8 @@ class _DrawerPageState extends State<DrawerPage> {
         },
         children: [
           const SurveyHomePage(),
-          const Center(child: Text('Question')), // Question screen
-          const Center(child: Text('My Outlets')), // Outlets screen
+          const SurveyQuestionScreen(), // Question screen
+          const SurveyOutletScreen(), // Outlets screen
           const Center(child: Text('Settings')), // Settings screen
         ],
       ),
