@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SurveyOutletScreen extends StatefulWidget {
   const SurveyOutletScreen({super.key});
@@ -28,29 +29,28 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
       backgroundColor: Colors.grey[100],
       body: CustomScrollView(
         slivers: [
-          // AppBar
           SliverAppBar(
             floating: true,
             pinned: true,
-            expandedHeight: 160,
+            expandedHeight: 160.h,
             backgroundColor: Colors.white30,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
                 color: Colors.teal,
-                padding: const EdgeInsets.fromLTRB(16, 80, 16, 16),
+                padding: EdgeInsets.fromLTRB(16.w, 80.h, 16.w, 16.h),
                 alignment: Alignment.bottomLeft,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
                       "Welcome back 👋",
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                      style: TextStyle(color: Colors.white70, fontSize: 14.sp),
                     ),
-                    SizedBox(height: 4),
+                    SizedBox(height: 4.h),
                     Text(
                       "Zahed's Outlet",
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 20.sp,
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -64,25 +64,25 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
           // Survey Summary
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w),
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 elevation: 3,
                 child: Padding(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Your Survey Summary",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: 16.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: const [
@@ -101,15 +101,15 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
           // Survey History Title
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+              padding: EdgeInsets.fromLTRB(16.w, 0, 16.w, 8.h),
               child: Row(
-                children: const [
-                  Icon(Icons.history, color: Colors.indigo),
-                  SizedBox(width: 8),
+                children: [
+                  Icon(Icons.history, color: Colors.indigo, size: 20.w),
+                  SizedBox(width: 8.w),
                   Text(
                     "Survey History",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.indigo,
                     ),
@@ -124,18 +124,35 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
             delegate: SliverChildBuilderDelegate((context, index) {
               final item = surveyHistory[index];
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
                 elevation: 1,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: ListTile(
-                  leading: const Icon(Icons.date_range, color: Colors.indigo),
-                  title: Text("Date: ${item['date']}"),
-                  subtitle: Text("Status: ${item['status']}"),
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 8.h,
+                  ),
+                  leading: Icon(
+                    Icons.date_range,
+                    color: Colors.indigo,
+                    size: 20.w,
+                  ),
+                  title: Text(
+                    "Date: ${item['date']}",
+                    style: TextStyle(fontSize: 14.sp),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  subtitle: Text(
+                    "Status: ${item['status']}",
+                    style: TextStyle(fontSize: 12.sp),
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   trailing: Text(
                     "${item['score']}%",
                     style: TextStyle(
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.bold,
                       color:
                           item['score'] >= 80
@@ -151,15 +168,15 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
           // Outlet Rankings Title
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+              padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 8.h),
               child: Row(
-                children: const [
-                  Icon(Icons.leaderboard, color: Colors.indigo),
-                  SizedBox(width: 8),
+                children: [
+                  Icon(Icons.leaderboard, color: Colors.indigo, size: 20.w),
+                  SizedBox(width: 8.w),
                   Text(
                     "Outlet Rankings",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.indigo,
                     ),
@@ -175,38 +192,47 @@ class _SurveyOutletScreenState extends State<SurveyOutletScreen> {
               final outlet = outletRanking[index];
               final isUserOutlet = outlet['name'] == 'Your Outlet';
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                margin: EdgeInsets.symmetric(horizontal: 16.w, vertical: 6.h),
                 elevation: 2,
                 color: isUserOutlet ? Colors.indigo.shade50 : Colors.white,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
                 child: ListTile(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 12.w,
+                    vertical: 8.h,
+                  ),
                   leading: CircleAvatar(
+                    radius: 16.r,
                     backgroundColor: Colors.indigo,
                     child: Text(
                       "${index + 1}",
-                      style: const TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.white, fontSize: 12.sp),
                     ),
                   ),
                   title: Text(
                     outlet['name'],
                     style: TextStyle(
+                      fontSize: 14.sp,
                       fontWeight:
                           isUserOutlet ? FontWeight.bold : FontWeight.w500,
                       color: isUserOutlet ? Colors.indigo : Colors.black87,
                     ),
+                    overflow: TextOverflow.ellipsis,
                   ),
                   trailing: Text(
                     "${outlet['score']}%",
-                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               );
             }, childCount: outletRanking.length),
           ),
 
-          // Extra Space for Safe Scroll
           const SliverToBoxAdapter(child: SizedBox(height: 32)),
         ],
       ),
@@ -226,17 +252,14 @@ class _SummaryItem extends StatelessWidget {
       children: [
         Text(
           value,
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
             color: Colors.indigo,
           ),
         ),
-        const SizedBox(height: 4),
-        Text(
-          label,
-          style: const TextStyle(fontSize: 13, color: Colors.black54),
-        ),
+        SizedBox(height: 4.h),
+        Text(label, style: TextStyle(fontSize: 13.sp, color: Colors.black54)),
       ],
     );
   }

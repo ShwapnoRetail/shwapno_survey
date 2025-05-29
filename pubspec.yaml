@@ -39,6 +39,7 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
 
 
   # To add assets to your application, add an assets section, like this:

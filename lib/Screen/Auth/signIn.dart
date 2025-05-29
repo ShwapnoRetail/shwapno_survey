@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shwapno_survey/Style/style.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -9,74 +10,133 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
           ScreenBackground(context),
-          Container(
-            padding: EdgeInsets.all(30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Get Start With", style: Head1Text(colorDarkBlue)),
-                SizedBox(height: 1),
-                Text("Shwapno", style: Head6Text(colorLightGray)),
-                SizedBox(height: 10),
-                TextFormField(
-                  decoration: AppInputDecoration("Enter Your Phone Number"),
-                ),
-                SizedBox(height: 20),
-                TextFormField(
-                  decoration: AppInputDecoration("Enter Your Password"),
-                ),
-                SizedBox(height: 20),
-                Container(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(context, '/dashboard');
-                    },
-                    style: AppButtonStyle(),
-                    child: SuccessButtonChild("Login"),
-                  ),
-                ),
-
-                Container(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/resetPassword");
+          SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.all(30.w),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 40.h),
+                    Text("Get Started With", style: Head1Text(colorDarkBlue)),
+                    SizedBox(height: 4.h),
+                    Text("Shwapno", style: Head6Text(colorLightGray)),
+                    SizedBox(height: 40.h),
+                    TextFormField(
+                      controller: _phoneController,
+                      keyboardType: TextInputType.phone,
+                      decoration: AppInputDecoration("Phone Number"),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your phone number';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 20.h),
+                    TextFormField(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      decoration: AppInputDecoration("Password").copyWith(
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscurePassword
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color: Colors.grey,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _obscurePassword = !_obscurePassword;
+                            });
+                          },
+                        ),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(height: 10.h),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/forgetPassword");
                         },
                         child: Text(
-                          'Forget Password?',
-                          style: Head7Text(colorLightGray),
+                          'Forgot Password?',
+                          style: TextStyle(fontSize: 14.sp, color: colorTeal),
                         ),
                       ),
-                      SizedBox(height: 18),
-                      InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, "/registration");
+                    ),
+                    SizedBox(height: 30.h),
+                    Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              '/dashboard',
+                            );
+                          }
                         },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Don't Have an account?",
-                              style: Head7Text(colorDarkBlue),
-                            ),
-                            Text("Sign Up", style: Head7Text(colorTeal)),
-                          ],
-                        ),
+                        style: AppButtonStyle(),
+                        child: SuccessButtonChild("Login"),
                       ),
-                    ],
-                  ),
+                    ),
+                    SizedBox(height: 20.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Don't have an account? ",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: colorDarkBlue,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, "/registration");
+                          },
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: colorTeal,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
         ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 const colorRed = Color.fromRGBO(231, 28, 36, 1);
 const colorDark = Color.fromRGBO(136, 28, 32, 1);
@@ -73,19 +74,26 @@ TextStyle Head9Text(textColor) {
   );
 }
 
-InputDecoration AppInputDecoration(label) {
+// Add this to your style.dart file if not already present
+InputDecoration AppInputDecoration(String label) {
   return InputDecoration(
-    focusedBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.teal, width: 1),
-    ),
-    fillColor: colorWhite,
-    filled: true,
-    contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 20),
-    enabledBorder: const OutlineInputBorder(
-      borderSide: BorderSide(color: colorWhite, width: 0.0),
-    ),
-    border: OutlineInputBorder(),
     labelText: label,
+    labelStyle: TextStyle(fontSize: 14.sp, color: Colors.grey.shade600),
+    contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 16.w),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8.r),
+      borderSide: BorderSide(color: Colors.grey.shade400),
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8.r),
+      borderSide: BorderSide(color: Colors.grey.shade400),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(8.r),
+      borderSide: BorderSide(color: colorTeal, width: 1.5),
+    ),
+    filled: true,
+    fillColor: Colors.white,
   );
 }
 

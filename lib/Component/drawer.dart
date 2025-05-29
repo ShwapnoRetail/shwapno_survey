@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shwapno_survey/Component/bottomNav.dart';
 import 'package:shwapno_survey/Screen/Profile/settings.dart';
 import 'package:shwapno_survey/Screen/Survey/surveyOutlet.dart';
-import 'package:shwapno_survey/Screen/Survey/surveyPage.dart';
-import 'package:shwapno_survey/Screen/Survey/surveyQuestion.dart'; // Add this import
+import 'package:shwapno_survey/Screen/Survey/surveyQuestion.dart';
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({super.key});
@@ -27,6 +27,7 @@ class _DrawerPageState extends State<DrawerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        width: 280.w,
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -35,86 +36,80 @@ class _DrawerPageState extends State<DrawerPage> {
               child: Row(
                 children: [
                   CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage('assets/images/shwapno.png'),
+                    radius: 32.r,
+                    backgroundColor: Colors.white,
+                    child: Icon(
+                      Icons.person,
+                      size: 36.w,
+                      color: Theme.of(context).primaryColor,
+                    ),
                   ),
-                  const SizedBox(width: 16),
+                  SizedBox(width: 16.w),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         "Abdul karim Baten",
                         style: TextStyle(
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
+                          overflow: TextOverflow.ellipsis,
                         ),
+                        maxLines: 1,
                       ),
+                      SizedBox(height: 4.h),
                       Text(
                         "01700700624",
-                        style: TextStyle(fontSize: 13, color: Colors.white),
+                        style: TextStyle(fontSize: 13.sp, color: Colors.white),
                       ),
                     ],
                   ),
                 ],
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.dashboard, color: Colors.teal),
-              title: Text('Dashboard'),
+            _buildDrawerItem(
+              context,
+              icon: Icons.dashboard,
+              title: 'Dashboard',
+              index: 0,
+            ),
+            _buildDrawerItem(
+              context,
+              icon: Icons.question_answer,
+              title: "Question",
+              index: 1,
+            ),
+            _buildDrawerItem(
+              context,
+              icon: Icons.score,
+              title: "My Rank",
+              index: -1, // No associated page
               onTap: () {
-                setState(() {
-                  _selectedIndex = 0;
-                  _pageController.jumpToPage(0);
-                });
-                Navigator.pop(context); // Close the drawer
+                // Handle My Rank separately
+                Navigator.pop(context);
               },
             ),
-            ListTile(
-              leading: Icon(Icons.question_answer, color: Colors.teal),
-              title: Text("Question"),
-              onTap: () {
-                setState(() {
-                  _selectedIndex = 1;
-                  _pageController.jumpToPage(1);
-                });
-                Navigator.pop(context); // Close the drawer
-              },
+            _buildDrawerItem(
+              context,
+              icon: Icons.store,
+              title: "My Outlets",
+              index: 2,
             ),
-            ListTile(
-              leading: Icon(Icons.score, color: Colors.teal),
-              title: Text("My Rank"),
+            _buildDrawerItem(
+              context,
+              icon: Icons.settings,
+              title: "Settings",
+              index: 3,
             ),
-            ListTile(
-              leading: Icon(
-                Icons.store,
-                color: Colors.teal,
-              ), // Changed icon to match bottom nav
-              title: Text("My Outlets"),
-              onTap: () {
-                setState(() {
-                  _selectedIndex = 2;
-                  _pageController.jumpToPage(2);
-                });
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings, color: Colors.teal),
-              title: Text("Settings"),
-              onTap: () {
-                setState(() {
-                  _selectedIndex = 3;
-                  _pageController.jumpToPage(3);
-                });
-                Navigator.pop(context); // Close the drawer
-              },
-            ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20.h),
             const Divider(),
-            ListTile(
-              leading: Icon(Icons.logout, color: Colors.teal),
-              title: Text("Logout"),
+            _buildDrawerItem(
+              context,
+              icon: Icons.logout,
+              title: "Logout",
+              index: -1,
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(
                   context,
@@ -127,10 +122,13 @@ class _DrawerPageState extends State<DrawerPage> {
         ),
       ),
       appBar: AppBar(
-        title: Text(_getAppBarTitle(_selectedIndex)),
+        title: Text(
+          _getAppBarTitle(_selectedIndex),
+          style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w600),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: Icon(Icons.logout, size: 24.w),
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                 context,
@@ -148,17 +146,58 @@ class _DrawerPageState extends State<DrawerPage> {
             _selectedIndex = index;
           });
         },
-        children: [
-          const SurveyHomePage(),
-          const SurveyQuestionScreen(), // Question screen
-          const SurveyOutletScreen(), // Outlets screen
-          const SettingsScreen(), // Settings screen
+        children: const [
+          SurveyHomePage(),
+          SurveyQuestionScreen(),
+          SurveyOutletScreen(),
+          SettingsScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationWidget(
         currentIndex: _selectedIndex,
         onTap: _onTapped,
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(
+    BuildContext context, {
+    required IconData icon,
+    required String title,
+    required int index,
+    VoidCallback? onTap,
+  }) {
+    final bool isSelected = _selectedIndex == index;
+    final Color iconColor =
+        isSelected
+            ? Theme.of(context).primaryColor
+            : Theme.of(context).iconTheme.color ?? Colors.grey;
+
+    return ListTile(
+      contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
+      leading: Icon(icon, color: iconColor, size: 24.w),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 14.sp,
+          color:
+              isSelected
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).textTheme.bodyMedium?.color,
+          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+        ),
+      ),
+      onTap:
+          onTap ??
+          () {
+            if (index >= 0) {
+              setState(() {
+                _selectedIndex = index;
+                _pageController.jumpToPage(index);
+              });
+            }
+            Navigator.pop(context);
+          },
     );
   }
 
