@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -15,35 +16,46 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         children: [
           // Profile Card
           Card(
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(16.r),
             ),
             elevation: 2,
             child: ListTile(
-              leading: const CircleAvatar(
-                backgroundColor: Colors.indigo,
-                child: Icon(Icons.person, color: Colors.white),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 8.h,
               ),
-              title: const Text("Zahed Hasan"),
-              subtitle: const Text("zahed@example.com"),
-              trailing: const Icon(Icons.edit),
-              onTap: () {
-                // Navigate to profile edit screen (future enhancement)
-              },
+              leading: CircleAvatar(
+                radius: 24.r,
+                backgroundColor: Colors.indigo,
+                child: Icon(Icons.person, size: 20.w, color: Colors.white),
+              ),
+              title: Text(
+                "Zahed Hasan",
+                style: TextStyle(fontSize: 16.sp),
+                overflow: TextOverflow.ellipsis,
+              ),
+              subtitle: Text(
+                "zahed@example.com",
+                style: TextStyle(fontSize: 12.sp),
+                overflow: TextOverflow.ellipsis,
+              ),
+              trailing: Icon(Icons.edit, size: 20.w),
+              onTap: () {},
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Account Settings
-          const Text(
+          Text(
             "Account Settings",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           SettingsTile(
             icon: Icons.lock,
             title: "Change Password",
@@ -55,43 +67,51 @@ class _SettingsScreenState extends State<SettingsScreen> {
             subtitle: "English",
             onTap: () {},
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Notifications
-          const Text(
+          Text(
             "Notifications",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           SwitchListTile(
-            title: const Text("Push Notifications"),
+            contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
+            title: Text(
+              "Push Notifications",
+              style: TextStyle(fontSize: 14.sp),
+            ),
             value: notificationsEnabled,
             activeColor: Colors.indigo,
             onChanged: (value) {
               setState(() => notificationsEnabled = value);
             },
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Appearance
-          const Text(
+          Text(
             "Appearance",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
           ),
-          const SizedBox(height: 8),
+          SizedBox(height: 8.h),
           SwitchListTile(
-            title: const Text("Dark Mode"),
+            contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
+            title: Text("Dark Mode", style: TextStyle(fontSize: 14.sp)),
             value: darkModeEnabled,
             activeColor: Colors.indigo,
             onChanged: (value) {
               setState(() => darkModeEnabled = value);
             },
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Support
-          const Text("Support", style: TextStyle(fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
+          Text(
+            "Support",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16.sp),
+          ),
+          SizedBox(height: 8.h),
           SettingsTile(
             icon: Icons.help_outline,
             title: "Help & Support",
@@ -102,7 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: "Privacy Policy",
             onTap: () {},
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
 
           // Logout
           SettingsTile(
@@ -138,11 +158,26 @@ class SettingsTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
-      leading: Icon(icon, color: Colors.indigo),
-      title: Text(title, style: TextStyle(color: textColor ?? Colors.black)),
-      subtitle: subtitle != null ? Text(subtitle!) : null,
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+      contentPadding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
+      minLeadingWidth: 24.w,
+      leading: Icon(icon, color: Colors.indigo, size: 20.w),
+      title: Text(
+        title,
+        style: TextStyle(
+          fontSize: 14.sp,
+          color: textColor ?? Colors.black,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+      subtitle:
+          subtitle != null
+              ? Text(
+                subtitle!,
+                style: TextStyle(fontSize: 12.sp),
+                overflow: TextOverflow.ellipsis,
+              )
+              : null,
+      trailing: Icon(Icons.arrow_forward_ios, size: 16.w),
       onTap: onTap,
     );
   }

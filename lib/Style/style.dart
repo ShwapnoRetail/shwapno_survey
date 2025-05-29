@@ -41,7 +41,7 @@ TextStyle Head1Text(textColor) {
   return TextStyle(
     color: textColor,
     fontSize: 28,
-    fontFamily: 'poppins',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w700,
   );
 }
@@ -50,7 +50,7 @@ TextStyle Head6Text(textColor) {
   return TextStyle(
     color: textColor,
     fontSize: 18,
-    fontFamily: 'poppins',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
   );
 }
@@ -59,7 +59,7 @@ TextStyle Head7Text(textColor) {
   return TextStyle(
     color: textColor,
     fontSize: 13,
-    fontFamily: 'poppins',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
   );
 }
@@ -68,7 +68,7 @@ TextStyle Head9Text(textColor) {
   return TextStyle(
     color: textColor,
     fontSize: 9,
-    fontFamily: 'poppins',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w500,
   );
 }
@@ -130,7 +130,7 @@ ButtonStyle AppStatusButtonStyle(btnColor) {
 TextStyle ButtonTextStyle() {
   return TextStyle(
     fontSize: 16,
-    fontFamily: 'poppins',
+    fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
   );
 }
